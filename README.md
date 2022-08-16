@@ -47,6 +47,8 @@ or :
 **WER (%) on LibriCSS**
 
 |Model|Year|0S|0L|OV10|OV20|OV30|OV40|
+| :-----| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+|Raw[3]|2020|11.8|11.7|18.8|27.2|35.6|43.3|
 
 
 ## Citation
@@ -56,6 +58,9 @@ or :
 
 [2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
 Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861
+
+[3] Chen Z, Yoshioka T, Lu L et al. Continuous speech separation: dataset and analysis. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2020:
+7284—7288
 
 This paper has been submitted to *Chinese Journal of Acoustics*.
 

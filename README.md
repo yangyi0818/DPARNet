@@ -31,7 +31,7 @@
 ## Train
 **We recommend running to train end-to-end :**
 
-```**./run.sh --id 0,1,2,3**```
+**```./run.sh --id 0,1,2,3```**
 
 **or :**
 

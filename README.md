@@ -10,7 +10,7 @@
   * **[Contents](#contents)**
   * **[Introduction](#introduction)**
   * **[Dataset](#dataset)**
-  * **[Experimental Requirement](#experimental requirement)**
+  * **[Requirement](#requirement)**
   * **[Train](#train)**
   * **[Test](#test)**
   * **[Results](#results)**
@@ -30,7 +30,7 @@
 
 **We use LibriCSS dataset as test set, which can be found [here][libricss].**
 
-## Experimental Requirement
+## Requirement
 **Our script use [asteroid][asteroid] as the basic framework.**
 
 ## Train
@@ -57,7 +57,7 @@
 |**Beam-Guided TasNet[3] (single stage)**| 2022| 7.3 |7.3 |7.8 |8.9 |10.6| 11.1 |
 |**Beam-Guided TasNet[3] (two stages)**|2022| 7.1 |7.1 |7.1 |8.0| 9.2| 9.7 |
 |**Proposed DPARNet** |- |7.2| 7.2| 7.4 |8.6 |10.3| 10.9|
-|**Beam-Guided DPARNet**| -| 7.3 |6.9 |7.2| 7.7 |9.0| 9.4|
+|**Beam-Guided DPARNet**| -| 7.3 |6.9 |7.2| 7.7 |9.0|$\color{red}{9.4}$|
 
 
 ## Citation

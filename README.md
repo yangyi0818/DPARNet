@@ -46,7 +46,7 @@ or :
 ## Results
 **WER (%) on LibriCSS**
 
-|Model|Year|0S|0L|OV10|OV20|OV30|OV40|
+|**Model|Year|0S|0L|OV10|OV20|OV30|OV40|
 | :-----| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
 |Raw[4]|2020|11.8|11.7|18.8|27.2|35.6|43.3|
 |BLSTM[5]|2021|7.0|7.5|10.8|13.4|16.5|18.8|12.3|
@@ -59,24 +59,24 @@ or :
 
 
 ## Citation
-[1] Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network 
+**[1] Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network 
 
-杨弋，胡琦，张鹏远. 基于双路注意力循环网络的轻量化语音分离
+**杨弋，胡琦，张鹏远. 基于双路注意力循环网络的轻量化语音分离
 
-[2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
+**[2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
 Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861
 
-[3] Chen H T, Zhang P Y. Beam-Guided TasNet: An Iterative Speech Separation Framework with Multi-Channel Output, 2021: arXiv preprint arXiv:
+**[3] Chen H T, Zhang P Y. Beam-Guided TasNet: An Iterative Speech Separation Framework with Multi-Channel Output, 2021: arXiv preprint arXiv:
 2102.02998
 
-[4] Chen Z, Yoshioka T, Lu L et al. Continuous speech separation: dataset and analysis. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2020:
+**[4] Chen Z, Yoshioka T, Lu L et al. Continuous speech separation: dataset and analysis. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2020:
 7284—7288
 
-[5] Chen S Y, Wu Y, Chen Z et al. Continuous Speech Separation with Conformer. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2021; 5749—5753
+**[5] Chen S Y, Wu Y, Chen Z et al. Continuous Speech Separation with Conformer. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2021; 5749—5753
 
-This paper has been submitted to *Chinese Journal of Acoustics*.
+**This paper has been submitted to *Chinese Journal of Acoustics*.
 
-Please feel free to contact us if you have any questions.
+**Please feel free to contact us if you have any questions.
 
 [libricss]: https://github.com/chenzhuo1011/libri_css
 [asteroid]: https://github.com/asteroid-team/asteroid

@@ -8,6 +8,7 @@
   * **[Contents](#contents)**
   * **[Introduction](#introduction)**
   * **[Dataset](#dataset)**
+  * **[Requirement](#requirement)**
 
 ## Introduction
 **DPARNet, which is an improvement of DPTFSNet [2], is composed of encoder, separation network and decoder. To alleviate the computation burden, sub-band processing approach is leveraged in the encoder. Dual-path attention mechanism and recurrent network structure are introduced in the separation network to model the speech signals in each sub-band, which facilitate extraction of deep feature information and rich spectrum details.**
@@ -17,7 +18,10 @@
 **Inspired by [3], we also introduce Beam-Guided DPARNet, which makes full use of spatial information.**
 
 ## Dataset
-**We use dataset LibriCSS, which can be found [here][libricss].**
+**We use LibriCSS dataset, which can be found [here][libricss].**
+
+## Requirement
+**Our script use [asteroid][asteroid] as the basic framework.** 
 
 # Results
 WER (%) on LibriCSS
@@ -39,5 +43,6 @@ This paper has been submitted to *Chinese Journal of Acoustics*.
 Please feel free to contact us if you have any questions.
 
 [libricss]: https://github.com/chenzhuo1011/libri_css
+[asteroid]: https://github.com/asteroid-team/asteroid
 
 

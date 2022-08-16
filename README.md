@@ -8,6 +8,8 @@
   * **[Contents](#contents)**
   * **[Introduction](#introduction)**
   * **[Dataset](#dataset)**
+  * **[Train](#train)**
+  * **[Test](#test)**
   * **[Requirement](#requirement)**
 
 ## Introduction
@@ -18,11 +20,20 @@
 **Inspired by [3], we also introduce Beam-Guided DPARNet, which makes full use of spatial information.**
 
 ## Dataset
-**We use [sms_wsj][sms_wsj] to generate reverb set. 'sms_wsj/reverb/scenario.py' and 'sms_wsj/database/create_rirs.py' should be replaced by scripts in 'sms_wsj_replace' folder.**
+**We use [sms_wsj][sms_wsj] to generate reverb set. ```sms_wsj/reverb/scenario.py``` and ```sms_wsj/database/create_rirs.py``` should be replaced by scripts in 'sms_wsj_replace' folder.**
 
-**use 'python generate_rir.py' to generate training and valadation data**
+**use ```python generate_rir.py``` to generate training and valadation data**
 
 **We use LibriCSS dataset as test set, which can be found [here][libricss].**
+
+## Train
+we recommend running to train end-to-end :
+```./run.sh --id 0,1,2,3```
+or :
+```./run.sh --id 0,1,2,3 --stage 1```
+
+## Test
+```./run.sh --id 0 --stage 2```
 
 ## Requirement
 **Our script use [asteroid][asteroid] as the basic framework.** 

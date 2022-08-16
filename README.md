@@ -77,6 +77,8 @@ Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**
 
 **[5] Chen S Y, Wu Y, Chen Z et al. Continuous Speech Separation with Conformer. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2021; 5749—5753**
 
+**[6] Zhang S Y, Li X F. Microphone Array Generalization for Multichannel Narrowband Deep Speech Enhancement. Proc. Interspeech, 2021: 666—670**
+
 *Please feel free to contact us if you have any questions.*
 
 [libricss]: https://github.com/chenzhuo1011/libri_css

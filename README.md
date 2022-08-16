@@ -48,12 +48,12 @@ or :
 
 |Model|Year|0S|0L|OV10|OV20|OV30|OV40|
 | :-----| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
-|Raw[3]|2020|11.8|11.7|18.8|27.2|35.6|43.3|
-|BLSTM[4]|2021|7.0|7.5|10.8|13.4|16.5|18.8|12.3|
-|Conformer-large[4]|2021|7.2|7.5|9.6|11.3|13.7|15.1|
-|DPT-FSNet[5]| 2022 |7.1| 7.3 |7.6| 8.9| 10.8| 11.3|
-|Beam-Guided TasNet[] (single stage)| 2022| 7.3 |7.3 |7.8 |8.9 |10.6| 11.1 |
-|Beam-Guided TasNet[] (two stages)|2022| 7.1 |7.1 |7.1 |8.0| 9.2| 9.7 |
+|Raw[4]|2020|11.8|11.7|18.8|27.2|35.6|43.3|
+|BLSTM[5]|2021|7.0|7.5|10.8|13.4|16.5|18.8|12.3|
+|Conformer-large[5]|2021|7.2|7.5|9.6|11.3|13.7|15.1|
+|DPT-FSNet[2]| 2022 |7.1| 7.3 |7.6| 8.9| 10.8| 11.3|
+|Beam-Guided TasNet[3] (single stage)| 2022| 7.3 |7.3 |7.8 |8.9 |10.6| 11.1 |
+|Beam-Guided TasNet[3] (two stages)|2022| 7.1 |7.1 |7.1 |8.0| 9.2| 9.7 |
 |proposed DPARNet |- |7.2| 7.2| 7.4 |8.6 |10.3| 10.9|
 |Beam-Guided DPARNet| -| 7.3 |6.9 |7.2| 7.7 |9.0| 9.4 |
 
@@ -66,8 +66,13 @@ or :
 [2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
 Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861
 
-[3] Chen Z, Yoshioka T, Lu L et al. Continuous speech separation: dataset and analysis. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2020:
+[3] Chen H T, Zhang P Y. Beam-Guided TasNet: An Iterative Speech Separation Framework with Multi-Channel Output, 2021: arXiv preprint arXiv:
+2102.02998
+
+[4] Chen Z, Yoshioka T, Lu L et al. Continuous speech separation: dataset and analysis. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2020:
 7284—7288
+
+[5] Chen S Y, Wu Y, Chen Z et al. Continuous Speech Separation with Conformer. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2021; 5749—5753
 
 This paper has been submitted to *Chinese Journal of Acoustics*.
 

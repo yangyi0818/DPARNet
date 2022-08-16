@@ -10,9 +10,9 @@
   * **[Contents](#contents)**
   * **[Introduction](#introduction)**
   * **[Dataset](#dataset)**
+  * **[Experimental Requirement](#experimental requirement)**
   * **[Train](#train)**
   * **[Test](#test)**
-  * **[Requirement](#requirement)**
   * **[Results](#results)**
   * **[Citation](#citation)**
 
@@ -30,6 +30,9 @@
 
 **We use LibriCSS dataset as test set, which can be found [here][libricss].**
 
+## Experimental Requirement
+**Our script use [asteroid][asteroid] as the basic framework.**
+
 ## Train
 **We recommend running to train end-to-end :**
 
@@ -40,10 +43,7 @@
 **```./run.sh --id 0,1,2,3 --stage 1```**
 
 ## Test
-**```./run.sh --id 0 --stage 2```**
-
-## Requirement
-**Our script use [asteroid][asteroid] as the basic framework.** 
+**```./run.sh --id 0 --stage 2```** 
 
 ## Results
 **WER (%) on LibriCSS**
@@ -51,13 +51,13 @@
 |**Model**|**Year**|**0S**|**0L**|**OV10**|**OV20**|**OV30**|**OV40**|
 | :-----| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
 |**Raw[4]**|2020|11.8|11.7|18.8|27.2|35.6|43.3|
-|**BLSTM[5]**|2021|<font color=Red>7.0</font>|7.5|10.8|13.4|16.5|18.8|12.3|
+|**BLSTM[5]**|2021|7.0|7.5|10.8|13.4|16.5|18.8|12.3|
 |**Conformer-large[5]**|2021|7.2|7.5|9.6|11.3|13.7|15.1|
 |**DPT-FSNet[2]**| 2022 |7.1| 7.3 |7.6| 8.9| 10.8| 11.3|
 |**Beam-Guided TasNet[3] (single stage)**| 2022| 7.3 |7.3 |7.8 |8.9 |10.6| 11.1 |
 |**Beam-Guided TasNet[3] (two stages)**|2022| 7.1 |7.1 |7.1 |8.0| 9.2| 9.7 |
 |**Proposed DPARNet** |- |7.2| 7.2| 7.4 |8.6 |10.3| 10.9|
-|**Beam-Guided DPARNet**| -| 7.3 |6.9 |7.2| 7.7 |9.0| <font color=Red>9.4|
+|**Beam-Guided DPARNet**| -| 7.3 |6.9 |7.2| 7.7 |9.0| 9.4|
 
 
 ## Citation

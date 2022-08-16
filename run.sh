@@ -82,11 +82,13 @@ if [[ $stage -le 2 ]]; then
         echo "Stage 2 - evaluation: Done."
 fi
 
+:'
 if [[ $stage -le 3 ]]; then
         echo "Stage 3 : PESQ and STOI"
         $python pesq_stoi.py ${save_dir_simu} ${test_dir_simu}
         echo "Stage 3 - PESQ and STOI: Done."
 fi
+'
 
 if [[ $stage -le 4 ]]; then
         echo "Stage 4 : ASR"

@@ -290,3 +290,26 @@ class DenseBlock(nn.Module):
         y3 = self.conv4(y2_1_0_x)[:,:,:-1]
 
         return y3
+    
+    
+class com_sisdr_loss1(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.sig_loss = PITLossWrapper(pairwise_neg_snr, pit_from='pw_mtx')
+
+    def forward(self, est_targets, targets, SP): # est_targets [b s m n] targets [b s m n] SP [b]
+        B, S, M, N = est_targets.size()
+        est_targets, targets = est_targets.permute(0,2,1,3).contiguous().view(B*M, S, N), targets.permute(0,2,1,3).contiguous().view(B*M, S, N)
+        SP = SP.repeat(M,1).transpose(0,1).contiguous().view(B*M)
+
+        if (sum(SP)==0):
+            sisdr_loss = self.sig_loss(est_targets, targets)
+        elif (sum(SP)==SP.shape[0]):
+            sisdr_loss = 0.05 * self.sig_loss(est_targets[:,[0]], targets[:,[0]])
+        else:
+            sisdr_loss = 0.05 * self.sig_loss(est_targets[SP == 1][:,[0]], targets[SP == 1][:,[0]]) + self.sig_loss(est_targets[SP == 0], targets[SP == 0])
+
+        loss = sisdr_loss.mean()
+        loss_dict = dict(sig_loss=loss, sisdr_loss=sisdr_loss.mean())
+
+        return loss, loss_dict

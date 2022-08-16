@@ -27,9 +27,12 @@
 **We use LibriCSS dataset as test set, which can be found [here][libricss].**
 
 ## Train
-we recommend running to train end-to-end :
+**We recommend running to train end-to-end :**
+
 ```./run.sh --id 0,1,2,3```
+
 or :
+
 ```./run.sh --id 0,1,2,3 --stage 1```
 
 ## Test

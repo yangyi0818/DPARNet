@@ -18,10 +18,12 @@
 **Inspired by [3], we also introduce Beam-Guided DPARNet, which makes full use of spatial information.**
 
 ## Dataset
-**We use LibriCSS dataset, which can be found [here][libricss].**
+**We use [sms_wsj][sms_wsj] to generate reverb set.**
+
+**We use LibriCSS dataset as test set, which can be found [here][libricss].**
 
 ## Requirement
-**Our script use [asteroid][asteroid] as the basic framework.** 
+**Our script use [asteroid][asteroid] as the basic framework. 'sms_wsj/reverb/scenario.py' and 'sms_wsj/database/create_rirs.py' should be replaced by scripts in 'sms_wsj_replace' folder.** 
 
 # Results
 WER (%) on LibriCSS
@@ -44,5 +46,6 @@ Please feel free to contact us if you have any questions.
 
 [libricss]: https://github.com/chenzhuo1011/libri_css
 [asteroid]: https://github.com/asteroid-team/asteroid
+[sms_wsj]: https://github.com/fgnt/sms_wsj
 
 

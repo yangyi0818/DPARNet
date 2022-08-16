@@ -17,7 +17,7 @@
 **Inspired by [3], we also introduce Beam-Guided DPARNet, which makes full use of spatial information.**
 
 ## Dataset
-**We use dataset LibriCSS, which can be found here.**
+**We use dataset LibriCSS, which can be found [here][libricss].**
 
 # Results
 WER (%) on LibriCSS
@@ -37,3 +37,7 @@ Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861
 This paper has been submitted to *Chinese Journal of Acoustics*.
 
 Please feel free to contact us if you have any questions.
+
+[libricss]: https://github.com/chenzhuo1011/libri_css
+
+

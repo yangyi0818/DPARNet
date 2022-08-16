@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离 [1]**
 
-**This paper has been submitted to** * Chinese Journal of Acoustics*. **中国声学学报 **
+This paper has been submitted to * Chinese Journal of Acoustics*. 中国声学学报 
 
 ## Contents 
 * **[DPARNet](#dparnet)**
@@ -55,9 +55,9 @@
 |**Conformer-large[5]**|2021|7.2|7.5|9.6|11.3|13.7|15.1|
 |**DPT-FSNet[2]**| 2022 |7.1| 7.3 |7.6| 8.9| 10.8| 11.3|
 |**Beam-Guided TasNet[3] (single stage)**| 2022| 7.3 |7.3 |7.8 |8.9 |10.6| 11.1 |
-|**Beam-Guided TasNet[3] (two stages)**|2022| 7.1 |7.1 |7.1 |8.0| 9.2| 9.7 |
+|**Beam-Guided TasNet[3] (two stages)**|2022| 7.1 |7.1 |**7.1** |8.0| 9.2| 9.7 |
 |**Proposed DPARNet** |- |7.2| 7.2| 7.4 |8.6 |10.3| 10.9|
-|**Beam-Guided DPARNet**| -| 7.3 |**6.9** |**7.2**| **7.7** |**9.0**|**9.4**|
+|**Beam-Guided DPARNet**| -| 7.3 |**6.9** |7.2| **7.7** |**9.0**|**9.4**|
 
 
 ## Citation
@@ -76,7 +76,7 @@ Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**
 
 **[5] Chen S Y, Wu Y, Chen Z et al. Continuous Speech Separation with Conformer. Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2021; 5749—5753**
 
-**Please feel free to contact us if you have any questions.**
+*Please feel free to contact us if you have any questions.*
 
 [libricss]: https://github.com/chenzhuo1011/libri_css
 [asteroid]: https://github.com/asteroid-team/asteroid

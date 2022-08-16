@@ -1,6 +1,5 @@
 import os
 import sys
-import argparse
 import json
 import numpy as np
 from tqdm import tqdm
@@ -12,16 +11,6 @@ import time
 from sms_wsj.database.create_rirs import config, scenarios, rirs
 from sms_wsj.reverb.reverb_utils import convolve
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--generate_NO", type=int, default=300, help="generate new rirs NO")
-
-def _worker_init_fn_(worker_id):
-    torch_seed = torch.initial_seed()
-
-    random.seed(torch_seed + worker_id)
-    if torch_seed >= 2**32:
-        torch_seed = torch_seed % 2**32
-    np.random.seed(torch_seed + worker_id)
     
 def generate_rir(i):
     src_position = '3d'    # choose between '2d','3d','Gaussian'
@@ -30,4 +19,35 @@ def generate_rir(i):
     geometry, sound_decay_time_range, sample_rate, filter_length = config()
     room_dimensions, source_positions, sensor_positions, sound_decay_time = scenarios(geometry, sound_decay_time_range,src_position,)
     h = rirs(sample_rate, filter_length, room_dimensions, source_positions, sensor_positions, sound_decay_time)
-    np.savez(reverb_matrixs_dir + str(i+10000).zfill(5) + '.npz', h=h, source_positions=source_positions, sensor_positions=sensor_positions,)
+    np.savez(reverb_matrixs_dir + str(i).zfill(5) + '.npz', h=h, source_positions=source_positions, sensor_positions=sensor_positions,)
+   
+
+def main(conf):
+    reverb_matrixs_dir = '/path/to/reverb-set/'
+    generate_NO = 1000
+
+    # generate new rirs
+    if not os.path.exists(reverb_matrixs_dir):
+        os.makedirs(reverb_matrixs_dir)
+    else:
+        if (input('target dir already esists, continue? [y/n]  ') == 'n'):
+            print('Exit. Nothing happends.')
+            sys.exit()
+    print('Generating reverb matrixs into ', reverb_matrixs_dir, '......')
+    '''
+    # single process
+    pbar = tqdm(range(generate_NO))
+    for i in pbar:
+    generate_rir(i, reverb_matrixs_dir)
+    '''
+    # multi process
+    time_start=time.time()
+    pool = Pool(processes=32)
+    args = []
+    for i in range (generate_NO):
+        args.append(i)
+    pool.map(generate_rir, args)
+    pool.close()
+    pool.join()
+    time_end=time.time()
+    print('totally cost ', round((time_end-time_start)/60), 'minutes')

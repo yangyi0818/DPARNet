@@ -1,9 +1,13 @@
-# DPARNet - Dual-Path Attention and Recurrent Network for speech separation
-Light-weight speech separation based on dual-path attention and recurrent neural network
+# DPARNet
+**Light-weight speech separation based on dual-path attention and recurrent neural network**
 
-基于双路注意力循环网络的轻量化语音分离 [1]
+**基于双路注意力循环网络的轻量化语音分离 [1]**
 
-# Introduction
+## Contents 
+
+[toc]
+
+## Introduction
 DPARNet, which is an improvement of DPTFSNet [2], is composed of encoder, separation network and decoder. To alleviate the computation burden, sub-band processing approach is leveraged in the encoder. Dual-path attention mechanism and recurrent network structure are introduced in the separation network to model the speech signals in each sub-band, which facilitate extraction of deep feature information and rich spectrum details.
 
 The parameters and computation cost of DPARNet model is only 0.15M and 15.2G/6s.

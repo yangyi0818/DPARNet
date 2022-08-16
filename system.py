@@ -40,8 +40,8 @@ class System(pl.LightningModule):
     def common_step(self, batch, batch_nb, train=True):
         inputs, targets, single_speaker = batch
 
-        est_targets, pha_src = self(inputs)
-        loss, loss_dict = self.loss_func(est_targets, pha_src, targets, single_speaker)
+        est_targets = self(inputs)
+        loss, loss_dict = self.loss_func(est_targets, targets, single_speaker)
 
         return loss, loss_dict
       

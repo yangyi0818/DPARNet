@@ -161,4 +161,111 @@ class Dataset(data.Dataset):
                                                     np.zeros_like(w1_con[rand_start1 + seg_len2:stop1 - seg_len3]), \
                                                     w3_con[rand_start3:stop3]], axis=0)
 
-            return mix_reverb, s1_reverb, s2_reverb, mix_name, single_speaker
+        return mix_reverb, s1_reverb, s2_reverb, mix_name, single_speaker
+    
+    def add_noise(self, mix_reverb):
+        # dynamic SNR
+        SNR = random.uniform(5,20)
+        if(random.uniform(0,1)<0.1):
+            w_n = np.random.randn(*mix_reverb.shape)
+        else:
+            w_n = sf.read(random.choice(self.noise_list), dtype="float32")[0]
+            start_inx = random.randint(0,w_n.shape[0]-mix_reverb.shape[0]-1)
+            w_n = w_n[start_inx:start_inx+mix_reverb.shape[0],0:mix_reverb.shape[-1]]
+        scalar = get_amplitude_scaling_factor(mix_reverb[:,0], w_n[:,0], snr = SNR)
+
+        mix_noise = mix_reverb + w_n / scalar
+        return mix_noise
+    
+    def __getitem__(self,idx):
+        raw_list = os.listdir(self.raw_dir)
+        SpeakerNo = len(raw_list)
+
+        speaker1 = np.random.randint(0,SpeakerNo)
+        speaker2 = np.random.randint(0,SpeakerNo)
+        speaker3 = np.random.randint(0,SpeakerNo)
+        while (speaker1 == speaker2):
+            speaker2 = np.random.randint(0,SpeakerNo)
+        while (speaker3 == speaker1 or speaker3 == speaker2):
+            speaker3 = np.random.randint(0,SpeakerNo)
+        raw_dir1 = self.raw_dir+raw_list[speaker1]
+        raw_dir2 = self.raw_dir+raw_list[speaker2]
+        raw_dir3 = self.raw_dir+raw_list[speaker3]
+
+        choose_rir = np.random.randint(0,self.rirNO)
+        rand_rir = np.load(self.reverb_matrixs_dir + str(choose_rir).zfill(5) + '.npz')
+        h_use, _source_positions, _sensor_positions = rand_rir['h'], rand_rir['source_positions'], rand_rir['sensor_positions']
+
+        # step1:add reverb to utterance
+        mix_reverb, s1_reverb, s2_reverb, mix_name, single_speaker = self.add_reverb(raw_dir1,raw_dir2,raw_dir3,h_use)
+
+        # step2:add noise
+        mix_noise = self.add_noise(mix_reverb)
+        mix_noise = mix_noise.transpose()[self.channel]
+
+        # choose reference channel
+        source_arrays = []
+        if (self.channel_permute):
+            #print('Using channel permutation...')
+            ref_channel = np.random.randint(0, len(self.channel))
+            # s1_reverb [n c]
+            source_arrays.append(np.concatenate((s1_reverb.T[ref_channel:], s1_reverb.T[:ref_channel]), axis=0))
+            source_arrays.append(np.concatenate((s2_reverb.T[ref_channel:], s2_reverb.T[:ref_channel]), axis=0))
+            mixture = np.concatenate((mix_noise[ref_channel:], mix_noise[:ref_channel]), axis=0)
+
+        else:
+            source_arrays.append(s1_reverb.T[self.channel])
+            source_arrays.append(s2_reverb.T[self.channel])
+            mixture = mix_noise
+            
+        # [s c n]
+        sources = torch.from_numpy(np.stack(source_arrays, axis=0).astype(np.float32))
+        # [c n]
+        mixture = torch.from_numpy(np.array(mixture).astype(np.float32))
+
+        # 2022.04.06
+        # normalization
+        if (self.normalize):
+            print('Using normalization...')
+            # [c n]
+            m_std = mixture.std(-1, keepdim=True)
+            # [c n]
+            mixture = normalize_tensor_wav(mixture, eps=EPS, std=m_std)
+            # [s n]
+            sources = normalize_tensor_wav(sources, eps=EPS, std=m_std[[ref_channel]])
+
+        # mixture [c n] sources [s c n]
+        return mixture, sources, single_speaker
+    
+    
+if __name__ == "__main__":
+    from tqdm import tqdm
+
+    base_dir = 'path/to/testset'
+    mix_reverb = os.path.join(base_dir, 'mix_reverb')
+    s1_reverb = os.path.join(base_dir, 's1_reverb')
+    s2_reverb = os.path.join(base_dir, 's2_reverb')
+
+    dir_list = [mix_reverb, s1_reverb, s2_reverb,]
+    for item in dir_list:
+        try:
+            os.makedirs(item)
+        except OSError:
+            pass
+
+    d = Dataset(
+            reverb_matrixs_dir = '/path/to/reverb-set/',
+            rirNO = 10000,
+            trainingNO = 1,
+            segment = 6,
+            channel = [0,1,2,3,4,5,6],
+            )
+
+    pbar = tqdm(range(10))
+    for i in pbar:
+        mix, src, _, _ = d[i]
+        sf.write(os.path.join(mix_reverb,'{}.wav'.format(i)),mix[0].numpy(),16000)
+        sf.write(os.path.join(s1_reverb,'{}.wav'.format(i)),src[0,0,:].numpy().transpose(),16000)
+        sf.write(os.path.join(s2_reverb,'{}.wav'.format(i)),src[1,0,:].numpy().transpose(),16000)
+
+    print('Done.')

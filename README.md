@@ -4,7 +4,7 @@
 **基于双路注意力循环网络的轻量化语音分离 [1]**
 
 ## Contents 
-* [跳到1. 这是一级标题](#1-DPARNet)
+* [DPARNet](#dparnet)
 
 ## Introduction
 DPARNet, which is an improvement of DPTFSNet [2], is composed of encoder, separation network and decoder. To alleviate the computation burden, sub-band processing approach is leveraged in the encoder. Dual-path attention mechanism and recurrent network structure are introduced in the separation network to model the speech signals in each sub-band, which facilitate extraction of deep feature information and rich spectrum details.

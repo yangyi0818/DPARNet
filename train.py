@@ -14,7 +14,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from dataset import Dataset
 from asteroid.engine.optimizers import make_optimizer
 from system import System
-from model import make_model_and_optimizer, com_sisdr_loss1
+from DPARNet import make_model_and_optimizer, com_sisdr_loss1
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--use_aneconic", type=int, required=True)

@@ -24,7 +24,7 @@
 **Inspired by [3], we also introduce Beam-Guided DPARNet, which makes full use of spatial information.**
 
 ## Dataset
-**We use [sms_wsj][sms_wsj] to generate reverb set. ```sms_wsj/reverb/scenario.py``` and ```sms_wsj/database/create_rirs.py``` should be replaced by scripts in 'sms_wsj_replace' folder.**
+**We use [sms_wsj][sms_wsj] to generate room impulse responses (RIRs) set. ```sms_wsj/reverb/scenario.py``` and ```sms_wsj/database/create_rirs.py``` should be replaced by scripts in 'sms_wsj_replace' folder.**
 
 **use ```python generate_rir.py``` to generate training and valadation data**
 

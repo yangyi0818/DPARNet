@@ -51,13 +51,10 @@ def load_best_model(model, exp_dir):
         best_model_path = min(best_k, key=best_k.get)
     except FileNotFoundError:
         # Get last checkpoint
-        """
         all_ckpt = os.listdir(os.path.join(exp_dir, 'checkpoints/'))
         all_ckpt=[(ckpt,int("".join(filter(str.isdigit,ckpt)))) for ckpt in all_ckpt]
         all_ckpt.sort(key=lambda x:x[1])
         best_model_path = os.path.join(exp_dir, 'checkpoints', all_ckpt[-1][0])
-        """
-        best_model_path = os.path.join(exp_dir, '_ckpt_epoch_51.ckpt')
     print( 'LOADING from ',best_model_path)
     # Load checkpoint
     checkpoint = torch.load(best_model_path, map_location='cpu')

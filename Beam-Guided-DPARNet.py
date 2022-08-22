@@ -48,19 +48,16 @@ class DPARNet1_DPARNet2(nn.Module):
                 )
 
     def forward(self, mixture, do_eval = 0): # mixture [b m n]
-        assert do_eval == 0 or do_eval == 1, "Eval type should be 0 (training) or 1 (multi-channel beamforming) !"
+        assert do_eval == 0 or do_eval == 1, "Eval type should be 0 (training) or 1 (mvdr) !"
 
         out_DPARNet1, pha_src = self.DPARNet1(mixture)           # [b s m n] # [b m f t]
-        out_DPARNet1, pha_src = out_DPARNet1.detach(), pha_src.detach()
         bf_DPARNet1 = self.mvdr(mixture, out_DPARNet1)           # [b s m n]
         out_DPARNet2_iter1 = self.DPARNet2(mixture, bf_DPARNet1) # [b s m n]
 
         bf_DPARNet2_iter1 = self.mvdr(mixture, out_DPARNet2_iter1)     # [b s m n]
         out_DPARNet2_iter2 = self.DPARNet2(mixture, bf_DPARNet2_iter1) # [b s m n]
 
-
         if do_eval == 0:
-            #return out_DPARNet1, out_DPARNet2_iter1, pha_src
             return out_DPARNet1, out_DPARNet2_iter1, out_DPARNet2_iter2, pha_src
 
         else:
@@ -74,7 +71,7 @@ class DPARNet1_DPARNet2(nn.Module):
 
             out_DPARNet2_iter4 = self.DPARNet2(mixture, bf_DPARNet2_iter3) # [b s m n]
 
-            return out_DPARNet2_iter4[:,:,0], out_DPARNet2_iter4
+            return out_DPARNet2_iter1[:,:,0], out_DPARNet2_iter1
 
 
 def half_reshape(x, inverse):
@@ -96,7 +93,7 @@ class DPARNet1(nn.Module):
                  num_spks=2,
                  frame_len=512,
                  frame_hop=128,
-                 width=48,
+                 width=64,
                  num_layers=3,
                  dropout_rate=0.4,
                  causal_conf=False,
@@ -199,7 +196,7 @@ class DPARNet2(nn.Module):
                  num_spks=2,
                  frame_len=512,
                  frame_hop=128,
-                 width=48,
+                 width=64,
                  num_layers=3,
                  dropout_rate=0.4,
                  causal_conf=False,

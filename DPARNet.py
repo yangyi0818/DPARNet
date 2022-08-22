@@ -25,7 +25,7 @@ class DPARNet(nn.Module):
 
         self.DPARNet2 = DPARNet2(
                 use_dense = False,
-                use_att = [True, True, False, False, False],
+                use_att = [True, True, True, True, False],
                 use_rnn = [True, False, False, False, False],
                 width = 64,
                 num_layers = 4,
@@ -34,14 +34,14 @@ class DPARNet(nn.Module):
                 )
 
     def forward(self, mixture, do_eval = 0):
-        assert do_eval == 0 or do_eval == 1, "Eval type should be 0 (training) or 1 (multi-channel beamforming) !"
+        assert do_eval == 0 or do_eval == 1, "Eval type should be 0 (training) or 1 (mvdr) !"
 
-        o_MISO2 = self.MISO2(mixture)
+        o_MIMO2 = self.DPARNet2(mixture)
 
         if do_eval == 0:
-            return o_MISO2
+            return o_MIMO2
         else:
-            return o_MISO2[:,:,0], o_MISO2
+            return o_MIMO2[:,:,0], o_MIMO2
 
 class DPARNet2(nn.Module):
     def __init__(self,
@@ -52,7 +52,7 @@ class DPARNet2(nn.Module):
                  num_spks=2,
                  frame_len=512,
                  frame_hop=128,
-                 width=48,
+                 width=64,
                  num_layers=3,
                  dropout_rate=0.4,
                  causal_conf=False,

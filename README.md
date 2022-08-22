@@ -28,10 +28,10 @@
 
 **use ```python generate_rir.py``` to generate training and valadation data**
 
-**We use LibriCSS dataset as test set, which can be found [here][libricss].**
+**We use [LibriCSS][libricss] dataset as test set.**
 
 ## Requirement
-**Our script use [asteroid][asteroid] as the basic framework.**
+**Our script use [asteroid][asteroid] toolkit as the basic framework.**
 
 ## Train
 **We recommend running to train end-to-end :**

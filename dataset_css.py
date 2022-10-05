@@ -8,7 +8,7 @@ import soundfile as sf
 EPS = 1e-8
 
 DATASET = "xiandao2020"
-sep_clean = {"mixture": "mix_noise", "sources": "each_spk", "infos": [], "default_nsrc": 2}
+sep_clean = {"mixture": "mix_noise", "infos": [], "default_nsrc": 2}
 
 xiandao2020_TASKS = {"sep_clean": sep_clean,}
 
@@ -56,12 +56,9 @@ class XiandaoDataset(data.Dataset):
         self.like_test = self.seg_len is None
         # Load json files
         mix_json = os.path.join(json_dir, self.task_dict["mixture"] + ".json")
-        sources_json = os.path.join(json_dir, self.task_dict["sources"] + ".json")
 
         with open(mix_json, "r") as f:
             mix_infos = json.load(f)
-        with open(sources_json, "r") as f:
-            sources_infos = json.load(f)
             
         # Filter out short utterances only when segment is specified
         orig_len = len(mix_infos)
@@ -72,8 +69,6 @@ class XiandaoDataset(data.Dataset):
                     drop_utt += 1
                     drop_len += mix_infos[i][1]
                     del mix_infos[i]
-                    for src_inf in sources_infos:
-                        del src_inf[i]
 
         print(
             "Drop {} utts({:.2f} h) from {} (shorter than {} samples)".format(
@@ -82,9 +77,6 @@ class XiandaoDataset(data.Dataset):
         )
         self.mix = mix_infos
         # Handle the case n_src > default_nsrc
-        while len(sources_infos) < self.n_src:
-            sources_infos.append([None for _ in range(len(self.mix))])
-        self.sources = sources_infos
 
     def __add__(self, xiandao):
         if self.n_src != xiandao.n_src:
@@ -101,7 +93,6 @@ class XiandaoDataset(data.Dataset):
             )
             
         self.mix = self.mix + xiandao.mix
-        self.sources = [a + b for a, b in zip(self.sources, xiandao.sources)]
 
     def __len__(self):
         return len(self.mix)
@@ -127,16 +118,10 @@ class XiandaoDataset(data.Dataset):
         name = dir_name + '/' + base_name
         seg_len = torch.as_tensor([len(x)])
 
-        # Load sources
-        s, _ = sf.read(self.sources[idx][0], start=rand_start, stop=stop, dtype="float32")
-        s = s.T
-
-        sources = torch.from_numpy(np.array(s).astype(np.float32))
         mixture = torch.from_numpy(np.array(x).astype(np.float32)).permute(1,0)
 
         if self.normalize_audio:
             m_std = mixture.std(-1, keepdim=True)
             mixture = normalize_tensor_wav(mixture, eps=EPS, std=m_std)
-            sources = normalize_tensor_wav(sources, eps=EPS, std=m_std)
 
-        return mixture, sources, name
+        return mixture, name

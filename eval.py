@@ -184,7 +184,7 @@ def main2(model, conf):
     torch.no_grad().__enter__()
     for idx in tqdm(range(len(test_set))):
         # Forward the network on the mixture.
-        mix, sources, name = tensors_to_device(test_set[idx], device=model_device)
+        mix, name = tensors_to_device(test_set[idx], device=model_device)
         name = name[:-4]
 
         # normalization

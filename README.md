@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离 [1]**
 
-**This paper has been submitted to *Chinese Journal of Acoustics. 中国声学学报*** 
+**This paper has been accepted by *Chinese Journal of Acoustics.*** 
 
 ## Contents 
 * **[DPARNet](#dparnet)**
@@ -63,7 +63,7 @@
 ## Citation
 **[1] Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network** 
 
-**杨弋，胡琦，张鹏远. 基于双路注意力循环网络的轻量化语音分离**
+**基于双路注意力循环网络的轻量化语音分离**
 
 **[2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
 Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**

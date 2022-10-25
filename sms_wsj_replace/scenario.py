@@ -147,22 +147,21 @@ def generate_sensor_positions(
     # NOTE rotation
     #sensor_positions = rot_x(rotate_x) @ sensor_positions
     #sensor_positions = rot_y(rotate_y) @ sensor_positions
-    sensor_positions = rot_z(rotate_z) @ sensor_positions
+    #sensor_positions = rot_z(rotate_z) @ sensor_positions
     
-    jitter = None
     if jitter is not None:
         sensor_positions += rng.normal(
             0., jitter, size=sensor_positions.shape
         )
 
-    return np.asarray(sensor_positions)
+    return np.asarray(sensor_positions + center)
   
 def generate_random_source_positions(
         center=np.zeros((3, 1)),
         sources=1,
         distance_interval=(0.3, 2.5),
         dims=2,
-        minimum_angular_distance=None, #0.175,  # 10 degree
+        minimum_angular_distance=None, 
         maximum_angular_distance=None,
         rng=np.random
 ):

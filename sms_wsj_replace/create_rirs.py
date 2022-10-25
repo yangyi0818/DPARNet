@@ -23,7 +23,7 @@ def config():
 
     return geometry, sound_decay_time_range, sample_rate, filter_length
 
-def scenarios(geometry,sound_decay_time_range,src_position,):
+def scenarios(geometry,sound_decay_time_range,):
     room_dimensions = sample_from_random_box(geometry["room"], geometry["random_box"])
     center = sample_from_random_box(geometry["center"], geometry["random_box"])
     source_positions = generate_random_source_positions(center=center,sources=geometry["number_of_sources"], dims=2)

@@ -25,7 +25,6 @@ def config():
 
 def scenarios(geometry,sound_decay_time_range,src_position,):
     room_dimensions = sample_from_random_box(geometry["room"], geometry["random_box"])
-    # NOTE pra 'center' was removed in the last version
     center = sample_from_random_box(geometry["center"], geometry["random_box"])
     source_positions = generate_random_source_positions(center=center,sources=geometry["number_of_sources"], dims=2)
 
@@ -39,8 +38,6 @@ def scenarios(geometry,sound_decay_time_range,src_position,):
         rotate_y=np.random.uniform(0, 0.01 * 2 * np.pi),
         rotate_z=np.random.uniform(0, 2 * np.pi),
     )
-    jitter = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.random.uniform(0,room_dimensions[2])]]).squeeze(-1)
-    sensor_positions = sensor_positions + jitter
     sound_decay_time = np.random.uniform(**sound_decay_time_range)
 
     return room_dimensions, source_positions, sensor_positions, sound_decay_time

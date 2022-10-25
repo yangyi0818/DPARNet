@@ -6,7 +6,7 @@ from sms_wsj.reverb.scenario import sample_from_random_box
 
 def config():
     # Either set it to zero or above 0.15 s. Otherwise, RIR contains NaN.
-    sound_decay_time_range = dict(low=0.2, high=0.6)
+    sound_decay_time_range = dict(low=0.15, high=0.6)
 
     geometry = dict(
         number_of_sources=3,
@@ -27,22 +27,7 @@ def scenarios(geometry,sound_decay_time_range,src_position,):
     room_dimensions = sample_from_random_box(geometry["room"], geometry["random_box"])
     # NOTE pra 'center' was removed in the last version
     center = sample_from_random_box(geometry["center"], geometry["random_box"])
-    if (src_position=='2d'):
-        # NOTE 2d
-        source_position1 = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.array([1.])]])
-        source_position2 = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.array([1.])]])
-        source_positions = np.hstack((source_position1,source_position2)).squeeze(-1)
-    elif (src_position=='3d'):
-        # NOTE 3d
-        source_position1 = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.random.uniform(0,room_dimensions[2])]])
-        source_position2 = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.random.uniform(0,room_dimensions[2])]])
-        source_position3 = np.array([[np.random.uniform(0,room_dimensions[0])],[np.random.uniform(0,room_dimensions[1])],[np.random.uniform(0,room_dimensions[2])]])
-        source_positions = np.hstack((source_position1,source_position2,source_position3)).squeeze(-1)
-    elif (src_position=='Gaussian'):
-        # NOTE 2d or 3d in Gaussian
-        source_positions = generate_random_source_positions(center=center,sources=geometry["number_of_sources"],dims=2)
-    else:
-        raise NotImplementedError("'src_position' should be one of '2d','3d' or 'Gaussian'")
+    source_positions = generate_random_source_positions(center=center,sources=geometry["number_of_sources"], dims=2)
 
     sensor_positions = generate_sensor_positions(
         shape=geometry["sensor_shape"],

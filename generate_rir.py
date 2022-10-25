@@ -13,7 +13,7 @@ from sms_wsj.reverb.reverb_utils import convolve
 
     
 def generate_rir(i):
-    src_position = '3d'    # choose between '2d','3d','Gaussian'
+    src_position = 'Gaussian'  # choose between '2d','3d','Gaussian'
     _worker_init_fn_(i)
     reverb_matrixs_dir = '/path/to/reverb-set/'
     geometry, sound_decay_time_range, sample_rate, filter_length = config()
@@ -24,7 +24,7 @@ def generate_rir(i):
 
 def main(conf):
     reverb_matrixs_dir = '/path/to/reverb-set/'
-    generate_NO = 1000
+    generate_NO = 10000
 
     # generate new rirs
     if not os.path.exists(reverb_matrixs_dir):

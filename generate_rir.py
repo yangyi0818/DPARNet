@@ -13,11 +13,10 @@ from sms_wsj.reverb.reverb_utils import convolve
 
     
 def generate_rir(i):
-    src_position = 'Gaussian'  # choose between '2d','3d','Gaussian'
     _worker_init_fn_(i)
     reverb_matrixs_dir = '/path/to/reverb-set/'
     geometry, sound_decay_time_range, sample_rate, filter_length = config()
-    room_dimensions, source_positions, sensor_positions, sound_decay_time = scenarios(geometry, sound_decay_time_range,src_position,)
+    room_dimensions, source_positions, sensor_positions, sound_decay_time = scenarios(geometry, sound_decay_time_range,)
     h = rirs(sample_rate, filter_length, room_dimensions, source_positions, sensor_positions, sound_decay_time)
     np.savez(reverb_matrixs_dir + str(i).zfill(5) + '.npz', h=h, source_positions=source_positions, sensor_positions=sensor_positions,)
    

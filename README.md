@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离**
 
-**This paper has been accepted by *Chinese Journal of Acoustics.*** 
+**This work has been accepted by *Chinese Journal of Acoustics.*** 
 
 ## Contents 
 * **[DPARNet](#dparnet)**
@@ -32,7 +32,7 @@
 **We use [LibriCSS][libricss] dataset as test set.**
 
 ## Requirement
-**Our script use [asteroid][asteroid] toolkit as the basic framework.**
+**Our script use [asteroid][asteroid] toolkit as the basic environment.**
 
 ## Train
 **We recommend running to train end-to-end :**

@@ -1,7 +1,7 @@
 # DPARNet
 **Light-weight speech separation based on dual-path attention and recurrent neural network**
 
-**基于双路注意力循环网络的轻量化语音分离 [1]**
+**基于双路注意力循环网络的轻量化语音分离**
 
 **This paper has been accepted by *Chinese Journal of Acoustics.*** 
 
@@ -15,6 +15,7 @@
   * **[Test](#test)**
   * **[Results](#results)**
   * **[Citation](#citation)**
+  * **[References](#references)**
 
 ## Introduction
 **DPARNet, which is an improvement of DPTFSNet [2], is composed of encoder, separation network and decoder. To alleviate the computation burden, sub-band processing approach is leveraged in the encoder. Dual-path attention mechanism and recurrent network structure are introduced in the separation network to model the speech signals in each sub-band, which facilitate extraction of deep feature information and rich spectrum details.**
@@ -61,9 +62,15 @@
 
 
 ## Citation
-**[1] Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network** 
+**At this time, you can cite our paper by:**
 
-**基于双路注意力循环网络的轻量化语音分离**
+**杨弋，胡琦，张鹏远. 基于双路注意力循环网络的轻量化语音分离. 声学学报**
+
+**Or:**
+
+**Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network. Chinese Journal of Acoustics** 
+
+## Referenecs
 
 **[2] Dang F, Chen H T, Zhang P Y. DPT-FSNet: Dual-path Transformer Based Full-band and Sub-band Fusion Network for Speech Enhancement. Proc. IEEE
 Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**
@@ -78,10 +85,8 @@ Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**
 
 **[6] Zhang S Y, Li X F. Microphone Array Generalization for Multichannel Narrowband Deep Speech Enhancement. Proc. Interspeech, 2021: 666—670**
 
-*Please feel free to contact us if you have any questions.*
+**Please feel free to contact us if you have any questions.**
 
 [libricss]: https://github.com/chenzhuo1011/libri_css
 [asteroid]: https://github.com/asteroid-team/asteroid
 [sms_wsj]: https://github.com/fgnt/sms_wsj
-
-

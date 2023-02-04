@@ -62,13 +62,7 @@
 
 
 ## Citation
-**At this time, you can cite our paper by:**
-
-**杨弋，胡琦，张鹏远. 基于双路注意力循环网络的轻量化语音分离. 声学学报**
-
-**Or:**
-
-**Yang Y, Hu Q, Zhang P Y. Light-weight speech separation based on dual-path attention and recurrent neural network. Chinese Journal of Acoustics** 
+**This paper has been accepted yet not published. The citation will be added here when it is published.**
 
 ## Referenecs
 

@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离**
 
-**This work has been accepted by *声学学报* (*Chinese Journal of Acoustics.*)** 
+**This work has been accepted by *声学学报 (Chinese Journal of Acoustics)*.** 
 
 ## Contents 
 * **[DPARNet](#dparnet)**

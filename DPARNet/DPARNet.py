@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# yangyi 2022.06
+# -Dense macs: 2.482 G/s params:147.848 k
+# +Dense macs:10.305 G/s params:639.880 k
 
 import torch
 import torch.nn as nn
@@ -14,16 +15,16 @@ from asteroid.losses import PITLossWrapper, pairwise_neg_sisdr, pairwise_neg_snr
 from feature import FeatureExtractor, AngleFeature
 
 def make_model_and_optimizer(conf):
-    model = DPARNet()
-    print(model)
+    model = MISO1_MISO2()
+    #print(model)
     optimizer = make_optimizer(model.parameters(), **conf['optim'])
     return model, optimizer
 
-class DPARNet(nn.Module):
+class MISO1_MISO2(nn.Module):
     def __init__(self):
-        super(DPARNet, self).__init__()
+        super(MISO1_MISO2, self).__init__()
 
-        self.DPARNet2 = DPARNet2(
+        self.MISO2 = MISO2(
                 use_dense = False,
                 use_att = [True, True, True, True, False],
                 use_rnn = [True, False, False, False, False],
@@ -34,16 +35,16 @@ class DPARNet(nn.Module):
                 )
 
     def forward(self, mixture, do_eval = 0):
-        assert do_eval == 0 or do_eval == 1, "Eval type should be 0 (training) or 1 (mvdr) !"
+        assert do_eval == 0 or do_eval == 1, "0 - training OR 1 - multi-channel beamforming"
 
-        o_MIMO2 = self.DPARNet2(mixture)
+        o_MISO2 = self.MISO2(mixture)
 
         if do_eval == 0:
-            return o_MIMO2
+            return o_MISO2
         else:
-            return o_MIMO2[:,:,0], o_MIMO2
-
-class DPARNet2(nn.Module):
+            return o_MISO2[:,:,0], o_MISO2
+    
+class MISO2(nn.Module):
     def __init__(self,
                  use_dense,
                  use_att,
@@ -52,12 +53,12 @@ class DPARNet2(nn.Module):
                  num_spks=2,
                  frame_len=512,
                  frame_hop=128,
-                 width=64,
+                 width=48,
                  num_layers=3,
                  dropout_rate=0.4,
                  causal_conf=False,
                 ):
-        super(DPARNet2, self).__init__()
+        super(MISO2, self).__init__()
 
         self.use_dense = use_dense
         self.use_att = use_att
@@ -80,9 +81,9 @@ class DPARNet2(nn.Module):
                 nn.LayerNorm(self.num_bins // 2 + 1),
                 nn.PReLU(self.width),
                 )
-        
-        self.in_Conv_att = nn.Sequential(nn.Conv2d(self.width, self.width // 2, kernel_size=(1, 1)), nn.PReLU())
 
+        self.in_Conv_att = nn.Sequential(nn.Conv2d(self.width, self.width // 2, kernel_size=(1, 1)), nn.PReLU())
+        
         self.dualrnn_attention = nn.ModuleList()
         for i in range (self.num_layers):
             self.dualrnn_attention.append(DualRNN_Attention(dropout_rate=self.dropout_rate, d_model=self.width//2, use_att=self.use_att[i], use_rnn=self.use_rnn[i]))
@@ -101,7 +102,7 @@ class DPARNet2(nn.Module):
             self.in_DenseBlock = None
             self.out_DenseBlock = None
 
-    
+
     def half_reshape(self, x, inverse):
         if(inverse):
             x = torch.cat([x[:,0:x.shape[1]//2,],x[:,x.shape[1]//2:x.shape[1]//2*2,]],-1)
@@ -123,7 +124,7 @@ class DPARNet2(nn.Module):
         x = self.in_Conv(x)  # [b w=64 t f]
         if (self.use_dense):
             x = self.in_DenseBlock(x)
-
+            
         x = self.in_Conv_att(x) # [b w=32 t f]
 
         for i in range (self.num_layers):
@@ -200,10 +201,10 @@ class DualRNN_Attention(nn.Module):
             #self.relu = None
             self.ln_rnn = None
 
-    def forward(self, x): # [b w t f=129]
+    def forward(self,x): # [b w t f=129]
         B, W, T, F = x.size()
         att_in1 = x.permute(0,2,3,1).contiguous().view(B*T, F, -1)
-
+        
         if (not self.use_att):
             att_out1 = att_in1
         else:
@@ -252,6 +253,7 @@ class DualRNN_Attention(nn.Module):
 
         return rnn_out2
 
+
 class DenseBlock(nn.Module):
 
     def __init__(self, init_ch, g1, g2):
@@ -284,7 +286,7 @@ class DenseBlock(nn.Module):
 
         y0_x = torch.cat((x,y0),dim=1)
         y1 = self.conv2(y0_x)[:,:,:-1]
-
+        
         y1_0_x = torch.cat((x,y0,y1),dim=1)
         y2 = self.conv3(y1_0_x)[:,:,:-1]
 
@@ -292,8 +294,8 @@ class DenseBlock(nn.Module):
         y3 = self.conv4(y2_1_0_x)[:,:,:-1]
 
         return y3
-
-class com_sisdr_loss1(nn.Module):
+    
+class com_sisdr_loss2(nn.Module):
     def __init__(self):
         super().__init__()
         self.sig_loss = PITLossWrapper(pairwise_neg_snr, pit_from='pw_mtx')
@@ -314,3 +316,18 @@ class com_sisdr_loss1(nn.Module):
         loss_dict = dict(sig_loss=loss, sisdr_loss=sisdr_loss.mean())
 
         return loss, loss_dict
+
+if __name__ == "__main__":
+    import torch
+    from thop import profile
+    from thop import clever_format
+
+    model = MISO1_MISO2()
+    #print(model)
+    mixture = torch.randn(1, 7, 16000) # b m n
+    macs, params = profile(model, inputs=(mixture))
+    macs, params = clever_format([macs, params], "%.3f")
+
+    print('macs:', macs)
+    print('params:', params)
+    

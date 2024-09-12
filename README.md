@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离**
 
-**This work has been published on *声学学报 (Chinese Journal of Acoustics)*.  The paper is available [here][Paper].** 
+**This work has been published on 声学学报 *(Chinese Journal of Acoustics)*.  The paper is available [here][Paper].** 
 
 ## Contents 
 * **[DPARNet](#dparnet)**
@@ -101,6 +101,7 @@ Int. Conf. Acoust. Speech Signal Process., 2022: 6857—6861**
 
 **Please feel free to contact us if you have any questions.**
 
+[Paper]: https://kns.cnki.net/kcms2/article/abstract?v=8oX70opUeL_csRlg3CyHljRzX8_P7Bdf9bdDPZNM78u11yizB0xSj5i-PufxXLHIMnJFouMxrqzguCdi9UGX_E043B1UU4db444UqiIsQNMeEz9kNSMelZInznKw-fNdUkUA0G3tvXUBujQEyyNh8-C1qsGAhlXbn3NgZ6a3-wIVp3jhC1eHlRQuBs61r7rsnBT1-dlIXK47IfxkBBoBA4FDbV8uN9Qm&uniplatform=NZKPT&language=CHS
 [libricss]: https://github.com/chenzhuo1011/libri_css
 [asteroid]: https://github.com/asteroid-team/asteroid
 [sms_wsj]: https://github.com/fgnt/sms_wsj

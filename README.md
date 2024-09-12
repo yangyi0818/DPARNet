@@ -3,7 +3,7 @@
 
 **基于双路注意力循环网络的轻量化语音分离**
 
-**This work has been accepted by *声学学报 (Chinese Journal of Acoustics)*.** 
+**This work has been published on *声学学报 (Chinese Journal of Acoustics)*.  The paper is available [here][Paper].** 
 
 ## Contents 
 * **[DPARNet](#dparnet)**
@@ -62,7 +62,27 @@
 
 
 ## Citation
-**This paper has been accepted yet not published. The citation will be added here when it is published.**
+**Cite our paper by:**  
+
+**@article{XIBA202305016,**  
+
+  **title={双路注意力循环网络的轻量化语音分离},**  
+  
+  **author={杨弋 and 胡琦 and 张鹏远},**  
+  
+  **journal={声学学报},**  
+  
+  **volume={48},**  
+  
+  **number={05},**  
+  
+  **pages={1060-1069},**
+  
+  **year={2023},**  
+  
+  **doi={10.15949/j.cnki.0371-0025.2023.05.013}**  
+  
+**}**
 
 ## Referenecs
 
